@@ -11,6 +11,7 @@ class MovieSerializer(serializers.ModelSerializer):
     serializers : rest_framework
     """
 
+    # show the name field of the people table using relationship
     people = serializers.SlugRelatedField(many=True, read_only=True, slug_field='name')
 
     class Meta:  # noqa: D106

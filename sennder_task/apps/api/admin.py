@@ -1,3 +1,4 @@
+"""Api admin file."""
 from django.contrib import admin
 
 from apps.api.models import Movie, People
