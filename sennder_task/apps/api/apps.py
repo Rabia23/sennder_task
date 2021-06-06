@@ -10,5 +10,5 @@ class ApiConfig(AppConfig):
     AppConfig : django.apps
     """
 
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.api'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.api"

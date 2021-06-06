@@ -1,6 +1,7 @@
 """Api urls file."""
 from django.urls import path
-from apps.api.views import MovieListTemplateView, MovieListAPIView
+
+from apps.api.views import MovieListAPIView, MovieListTemplateView
 
 urlpatterns = [
     # show movie list in the give template file

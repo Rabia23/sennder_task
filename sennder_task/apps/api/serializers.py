@@ -1,5 +1,6 @@
 """Api serializers file."""
 from rest_framework import serializers
+
 from apps.api.models import Movie
 
 
@@ -11,9 +12,18 @@ class MovieSerializer(serializers.ModelSerializer):
     serializers : rest_framework
     """
 
-    # show the name field of the people table using relationship
-    people = serializers.SlugRelatedField(many=True, read_only=True, slug_field='name')
+    # use the `name` field of the people model using relationship
+    people = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field="name"
+    )
 
     class Meta:  # noqa: D106
         model = Movie
-        fields = ("key", "title", "director", "producer", "release_date", "people")
+        fields = (
+            "key",
+            "title",
+            "director",
+            "producer",
+            "release_date",
+            "people",
+        )

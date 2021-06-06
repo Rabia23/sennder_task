@@ -1,5 +1,6 @@
 """Pagination file."""
 from rest_framework.pagination import PageNumberPagination
+
 from sennder_task.settings import PAGE_SIZE
 
 

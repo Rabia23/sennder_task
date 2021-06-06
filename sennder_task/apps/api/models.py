@@ -11,11 +11,15 @@ class Movie(models.Model):
     models : django.db
     """
 
-    key = models.CharField(_("key"), max_length=100, db_index=True, unique=True)
+    key = models.CharField(
+        _("key"), max_length=100, db_index=True, unique=True
+    )
     title = models.CharField(_("title"), max_length=100, blank=True)
     director = models.CharField(_("director"), max_length=50, blank=True)
     producer = models.CharField(_("producer"), max_length=50, blank=True)
-    release_date = models.PositiveIntegerField(_("release_date"), null=True, blank=True)
+    release_date = models.PositiveIntegerField(
+        _("release_date"), null=True, blank=True
+    )
     created_at = models.DateField(
         _("created_at"),
         auto_now_add=True,
@@ -45,7 +49,9 @@ class People(models.Model):
     models : django.db
     """
 
-    key = models.CharField(_("key"), max_length=100, db_index=True, unique=True)
+    key = models.CharField(
+        _("key"), max_length=100, db_index=True, unique=True
+    )
     name = models.CharField(_("name"), max_length=100, blank=True)
     gender = models.CharField(_("gender"), max_length=50, blank=True)
     age = models.PositiveIntegerField(_("age"), null=True, blank=True)
