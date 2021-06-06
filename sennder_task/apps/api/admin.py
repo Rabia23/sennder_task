@@ -1,0 +1,31 @@
+from django.contrib import admin
+
+from apps.api.models import Movie, People
+
+
+class MovieAdmin(admin.ModelAdmin):
+    """Movie model admin.
+
+    Parameters
+    ----------
+    admin : django.contrib
+    """
+
+    list_display = ("id", "key", "title")
+
+
+admin.site.register(Movie, MovieAdmin)
+
+
+class PeopleAdmin(admin.ModelAdmin):
+    """People model admin.
+
+    Parameters
+    ----------
+    admin : django.contrib
+    """
+
+    list_display = ("id", "key", "name")
+
+
+admin.site.register(People, PeopleAdmin)
