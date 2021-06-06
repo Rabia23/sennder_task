@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>Movie List</title>
+      </head>
+    <body>
+        <h3>Movies List</h3>
+        <ul>
+            {% for movie in movies %}
+            <li>{{ movie.title }}</li>
+                {% for character in movie.people.all %}
+                    <ul>
+                        <li>{{ character.name }}</li>
+                    </ul>  
+                {% endfor %}
+            {% empty %}
+                <p>No movie found!</p>
+            {% endfor %}
+        </ul>
+        <!-- <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Producer</th>
+                <th>People</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.director }}</td>
+                    <td>{{ movie.producer }}</td>
+                    <td>
+                        {% for character in movie.people.all %}
+                            <tr>
+                                <td>{{ character.name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+          
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active">
+                            <span>&nbsp; {{ i }} &nbsp;<span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </body>
+</html>
