@@ -14,9 +14,9 @@ class Movie(models.Model):
     key = models.CharField(
         _("key"), max_length=100, db_index=True, unique=True
     )
-    title = models.CharField(_("title"), max_length=100, blank=True)
-    director = models.CharField(_("director"), max_length=50, blank=True)
-    producer = models.CharField(_("producer"), max_length=50, blank=True)
+    title = models.CharField(_("title"), max_length=150, blank=True)
+    director = models.CharField(_("director"), max_length=150, blank=True)
+    producer = models.CharField(_("producer"), max_length=150, blank=True)
     release_date = models.PositiveIntegerField(
         _("release_date"), null=True, blank=True
     )
@@ -52,9 +52,9 @@ class People(models.Model):
     key = models.CharField(
         _("key"), max_length=100, db_index=True, unique=True
     )
-    name = models.CharField(_("name"), max_length=100, blank=True)
-    gender = models.CharField(_("gender"), max_length=50, blank=True)
-    age = models.PositiveIntegerField(_("age"), null=True, blank=True)
+    name = models.CharField(_("name"), max_length=150, blank=True)
+    gender = models.CharField(_("gender"), max_length=10, blank=True)
+    age = models.CharField(_("age"), max_length=50, blank=True)
     movies = models.ManyToManyField(Movie, related_name="people")
     created_at = models.DateField(
         _("created_at"),
