@@ -26,15 +26,15 @@ class MovieListAPIViewTestCase(TestCase):
                 "title": "fault in our stars",
                 "director": "noor khan",
                 "producer": "ali saeed",
-                "release_date": 1987
+                "release_date": 1987,
             },
             {
                 "key": "222",
                 "title": "cindrella",
                 "director": "noor khan",
                 "producer": "ali saeed",
-                "release_date": 2001
-            }
+                "release_date": 2001,
+            },
         ]
         people_list = [
             {
@@ -48,7 +48,7 @@ class MovieListAPIViewTestCase(TestCase):
                 "name": "rum rum",
                 "gender": "female",
                 "age": "28",
-            }
+            },
         ]
         # insert movies
         for movie in movies_list:
@@ -73,7 +73,8 @@ class MovieListAPIViewTestCase(TestCase):
         self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_empty_database_returns_empty_list(self):
-        """Test that url returns empty list if there is no data in the database."""
+        """Test that url returns empty list if there is no data
+        in the database."""
         res = self.client.get(self.url)
         self.assertEqual(res.json()["results"], [])
 
@@ -85,10 +86,16 @@ class MovieListAPIViewTestCase(TestCase):
         # assert that api returns all the records from the db
         self.assertEqual(res.json()["count"], 2)
         # assert the title of first movie
-        self.assertEqual(res.json()["results"][0]["title"], "fault in our stars")
+        self.assertEqual(
+            res.json()["results"][0]["title"], "fault in our stars"
+        )
         # assert the people of first movie
-        self.assertEqual(res.json()["results"][0]["people"], ['pum pum', 'rum rum'])
+        self.assertEqual(
+            res.json()["results"][0]["people"], ["pum pum", "rum rum"]
+        )
         # assert the title of second movie
         self.assertEqual(res.json()["results"][1]["title"], "cindrella")
         # assert the people of second movie
-        self.assertEqual(res.json()["results"][1]["people"], ['pum pum', 'rum rum'])
+        self.assertEqual(
+            res.json()["results"][1]["people"], ["pum pum", "rum rum"]
+        )

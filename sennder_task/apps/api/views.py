@@ -54,4 +54,6 @@ class MovieListTemplateView(ListView):
 class RunCeleryTaskView(APIView):
     def get(self, request, format=None):
         update_db.delay()
-        return Response("Task will run shortly", status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            "Task will run shortly", status=status.HTTP_204_NO_CONTENT
+        )

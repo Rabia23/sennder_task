@@ -66,9 +66,7 @@ class MovieTestCase(TransactionTestCase):
         self.assertEqual(Movie.objects.count(), 1)
 
         # create record with the same key raises duplicate entry error
-        expected_error_message = (
-            "Duplicate entry '12cfb892-aac0-4c5b-94af-521852e46d6a' for key 'api_movie.key'"
-        )
+        expected_error_message = "Duplicate entry '12cfb892-aac0-4c5b-94af-521852e46d6a' for key 'api_movie.key'"  # noqa:501
         with self.assertRaisesRegexp(IntegrityError, expected_error_message):
             Movie.objects.create(**movie_obj)
         # assert that no new record is added in the db
@@ -82,4 +80,5 @@ class PeopleTestCase(TransactionTestCase):
     ----------
     TransactionTestCase : django.test
     """
+
     # will be added later
