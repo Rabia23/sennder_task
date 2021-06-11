@@ -55,6 +55,7 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "drf_yasg",
+    "django_celery_beat",
 ]
 
 LOCAL_APPS = ["apps.api"]
@@ -155,7 +156,7 @@ PAGE_SIZE = 10
 
 
 # CELERY Settings
-BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'

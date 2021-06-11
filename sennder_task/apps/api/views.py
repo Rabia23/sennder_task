@@ -50,8 +50,8 @@ class MovieListTemplateView(ListView):
     queryset = Movie.objects.all()
 
 
+# This class is only for me
 class RunCeleryTaskView(APIView):
     def get(self, request, format=None):
-        print(update_db.name)
         update_db.delay()
         return Response("Task will run shortly", status=status.HTTP_204_NO_CONTENT)

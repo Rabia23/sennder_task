@@ -1,8 +1,8 @@
-from celery.decorators import task
 from celery.utils.log import get_task_logger
 from apps.utils import make_request
 from sennder_task.settings import FILMS_URL, PEOPLE_URL, READ_LIMIT
 from apps.api.models import Movie, People
+from sennder_task.celery import app
 
 logger = get_task_logger(__name__)
 
@@ -85,7 +85,7 @@ def fetch_and_save_people():
                 logger.info(f"movies: {current_keys} have been assigned to people: {people.key}")
 
 
-@task(name="update_db")
+@app.task
 def update_db():
     fetch_and_save_movies()
     fetch_and_save_people()
