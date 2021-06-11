@@ -54,6 +54,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "drf_yasg",
 ]
 
 LOCAL_APPS = ["apps.api"]
@@ -151,3 +152,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Page size for paginated data
 PAGE_SIZE = 10
+
+
+# CELERY Settings
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Karachi'
+
+# Ghibli API
+FILMS_URL = "https://ghibliapi.herokuapp.com/films"
+PEOPLE_URL = "https://ghibliapi.herokuapp.com/people"
+READ_LIMIT = 250
