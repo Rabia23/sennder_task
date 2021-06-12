@@ -74,7 +74,8 @@ class MovieListAPIViewTestCase(TestCase):
 
     def test_empty_database_returns_empty_list(self):
         """Test that url returns empty list if there is no data
-        in the database."""
+        in the database.
+        """
         res = self.client.get(self.url)
         self.assertEqual(res.json()["results"], [])
 
