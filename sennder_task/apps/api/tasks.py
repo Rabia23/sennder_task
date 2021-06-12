@@ -9,13 +9,13 @@ from sennder_task.settings import FILMS_URL, PEOPLE_URL, READ_LIMIT
 logger = get_task_logger(__name__)
 
 
-def get_movies_keys_from_urls(films_list):
+def get_movies_keys_from_urls(movies_list):
     """
     Extract the movies keys from the list of movies urls.
 
     Parameters
     ----------
-    films_list : list
+    movies_list : list
         list containing of movies urls
 
     Returns
@@ -25,7 +25,7 @@ def get_movies_keys_from_urls(films_list):
         e.g returns "2baf70d1-42bb-4437-b551-e5fed5a87abe" from url
         "https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"  # noqa:501
     """
-    return [f.split("/")[-1] for f in films_list]
+    return [m.split("/")[-1] for m in movies_list]
 
 
 def get_new_movies_keys(old_keys, current_keys):
@@ -53,7 +53,7 @@ def get_new_movies_keys(old_keys, current_keys):
     return new_keys
 
 
-def get_existing_films_per_people():
+def get_existing_movies_per_people():
     """
     Get all the poeple keys along with the movie keys from the database.
 
@@ -68,15 +68,16 @@ def get_existing_films_per_people():
         returns the dict consists of `people_key` as a key with the list of
         `movies_keys` as a value
     """
-    existing_ppl_with_films = {}
+    existing_ppl_with_movies = {}
     for obj in People.objects.values("key", "movies__key"):
-        if obj.get("key") in existing_ppl_with_films:
-            existing_ppl_with_films[obj.get("key")].append(
+        if obj.get("key") in existing_ppl_with_movies:
+            existing_ppl_with_movies[obj.get("key")].append(
                 obj.get("movies__key")
             )
         else:
-            existing_ppl_with_films[obj.get("key")] = [obj.get("movies__key")]
-    return existing_ppl_with_films
+            existing_ppl_with_movies[obj.get("key")] = [obj.get("movies__key")]
+
+    return existing_ppl_with_movies
 
 
 def assign_movies_to_people(people_obj, movies_keys):
@@ -131,11 +132,11 @@ def fetch_and_save_people():
     Fetch the people with the given URL and params and save in the database.
 
     If people don't exist, creates a new one and attach movies with it. If
-    people already exist, checks whether the new film is added to it or not.
-    If added then attach that film to the existing people.
+    people already exist, checks whether the new movie is added to it or not.
+    If added then attach that movie to the existing people.
     """
     # get the existing people along with movies from the db
-    existing_ppl_with_films = get_existing_films_per_people()
+    existing_ppl_with_movies = get_existing_movies_per_people()
 
     params = {"limit": READ_LIMIT, "fields": "id,name,gender,age,films"}
     # fetch the people data from the url
@@ -143,14 +144,14 @@ def fetch_and_save_people():
 
     for obj in results:
         key = obj.pop("id")
-        films_list = obj.pop("films")
+        movies_list = obj.pop("films")
         # get the movies keys from the list of movies urls
-        current_keys = get_movies_keys_from_urls(films_list)
+        current_keys = get_movies_keys_from_urls(movies_list)
         # if people already exist in db
-        if key in existing_ppl_with_films:
+        if key in existing_ppl_with_movies:
             # get the new movies keys that needs to be added in db
             new_movies_keys = get_new_movies_keys(
-                old_keys=existing_ppl_with_films.get(key),
+                old_keys=existing_ppl_with_movies.get(key),
                 current_keys=current_keys,
             )
             if new_movies_keys:
@@ -189,8 +190,8 @@ def update_db():
     exist, creates a new one otherwise skips it.
     - fetches the people with the given URL and params. If people don't exist,
     creates a new one and associates movies with it.
-    - If people already exist, it checks whether the new film is added to it
-    or not. If added then associate that film to the existing people.
+    - If people already exist, it checks whether the new movie is added to it
+    or not. If added then associate that movie to the existing people.
     """
     fetch_and_save_movies()
     fetch_and_save_people()

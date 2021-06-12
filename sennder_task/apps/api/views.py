@@ -28,7 +28,7 @@ class MovieListAPIView(ListAPIView):
     """
 
     serializer_class = MovieSerializer
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.all().order_by("id")
     pagination_class = StandardResultsSetPagination
     permission_classes = [permissions.AllowAny]
 
@@ -47,7 +47,7 @@ class MovieListTemplateView(ListView):
     template_name = "movies_list.html"
     context_object_name = "movies"
     paginate_by = PAGE_SIZE
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.all().order_by("id")
 
 
 # This class is only for me
