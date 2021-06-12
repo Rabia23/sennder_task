@@ -9,10 +9,21 @@ logger = logging.getLogger(__name__)
 
 def make_request(url, params=None):
     """
-    Helper method that uses Python Requests library to make calls to
+    Helper method that uses python requests library to make calls to
     external APIs
-    :param url: url on which request can make
-    :return: data returned by requests library in the json format
+
+    Parameters
+    ----------
+    url : str
+        url on which request can make
+    params : dict, optional
+        url parameters, by default None
+
+    Returns
+    -------
+    list
+        data returned by requests library in the json format if response code
+        is 200, empty list otherwise
     """
     results = []
     try:
