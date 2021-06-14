@@ -183,6 +183,11 @@ make showmigrations
 make start-server
 ```
 
+- Open a new tab and start the redis server:
+```
+make start-redis
+```
+
 - Open a new tab and start the celery worker (make sure virtual env is active):
 ```
 make start-celeryworker
