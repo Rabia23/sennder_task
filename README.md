@@ -143,7 +143,7 @@ rabia@Rabias-MacBook-Pro studio-ghibli-nhedwx % mysql -u root -p
 Enter password: root
 
 create databases and database user
-mysql> /Users/rabia/Downloads/studio-ghibli-nhedwx/senndertask/conf/init.sql (absolute path to init.sql file)  
+mysql> source /Users/rabia/Downloads/studio-ghibli-nhedwx/senndertask/conf/init.sql (absolute path to init.sql file)  
 
 mysql> show databases;
 mysql> select Host, User from mysql.user;
