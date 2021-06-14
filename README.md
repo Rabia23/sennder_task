@@ -50,7 +50,47 @@ The `movies-api` endpoint is a REST API that uses simple page number based style
 
 
 ## Project Structure (App Based):
-will do later
+```bash
+Studio-Ghibli-Nhedwx/
+├── README.md
+├── .gitignore
+└── senndertask
+    ├── Makefile
+    ├── apps
+    │   ├── __init__.py
+    │   ├── api
+    │   │   ├── __init__.py
+    │   │   ├── admin.py
+    │   │   ├── apps.py
+    │   │   ├── migrations
+    │   │   │   ├── 0001_initial.py
+    │   │   │   ├── 0002_auto_20210610_1605.py
+    │   │   │   ├── __init__.py
+    │   │   ├── models.py
+    │   │   ├── serializers.py
+    │   │   ├── tasks.py
+    │   │   ├── tests
+    │   │   │   ├── __init__.py
+    │   │   │   ├── test_models.py
+    │   │   │   └── test_views.py
+    │   │   ├── urls.py
+    │   │   └── views.py
+    │   ├── pagination.py
+    │   └── utils.py
+    ├── conf
+    │   └── init.sql
+    ├── manage.py
+    ├── requirements.txt
+    ├── senndertask
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── celery.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    └── templates
+        └── movies_list.html
+```
 
 ### Python Libraries/Frameworks used:
 -  **django** - This is a Python-based open-source web framework that follows the model-template-view
@@ -68,7 +108,6 @@ to build API documentation.
 
 ### Prerequisite
 - Make sure you have Python and Mysql installed in your system :)
-
 **Note:** Python 3.6.0 is used for the task.
 
 ### How to start application (using Virtual Environment)
@@ -103,7 +142,7 @@ rabia@Rabias-MacBook-Pro studio-ghibli-nhedwx % mysql -u root -p
 Enter password: root
 
 create databases and database user
-mysql> source /Users/rabia/Downloads/sennder_hometask/sennder_task/conf/init.sql (absolute path to init.sql file)
+mysql> /Users/rabia/Downloads/studio-ghibli-nhedwx/senndertask/conf/init.sql (absolute path to init.sql file)  
 
 mysql> show databases;
 mysql> select Host, User from mysql.user;
@@ -120,7 +159,7 @@ source env/bin/activate
 
 - Go into the project directory:
 ```
-cd sennder_task
+cd senndertask
 ```
 
 - Install project requirements:
@@ -152,9 +191,7 @@ make start-celeryworker
 ```
 make start-celerybeat
 ```
-
 **Note**: The `update_db` scheduled task updates the database after every minute.
-
 
 ### How to run django admin
 
@@ -175,7 +212,6 @@ Enter the credentials that you have created above using command and you are good
 ```
 make tests
 ```
-
 **Note:** The tests command uses the --keepdb option. It preserves the test database between test runs. It skips the create and destroy actions which can greatly decrease the time to run tests.
 
 ### Different ways to test the API
@@ -199,3 +235,8 @@ make tests
     curl -X GET "http://localhost:8080/movies-api/" -H  "accept: application/json"
     ```
 
+#### Things that are not included in the task due to time constraints and make the task easy to review from reviewer's perspective:
+- API authentication is not added. The API endpoint is public.
+- Data will be inserted once from csv file into database. If you want to insert it again, you need to truncate/delete the data from the table.
+- Database credentials are directly added in the settings.py file. It should be confidential from security prespective.
+- Python logs are being displayed on the console instead of file for the sake of simplicity.
