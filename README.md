@@ -204,8 +204,9 @@ make create-superuser
 - Run the django admin by entering following command in the browser:
 ```
 localhost:8080/admin
-Enter the credentials that you have created above using command and you are good to go.
 ```
+
+Enter the credentials that you have created above using command and you are good to go.
 
 ### How to run application unittests
 
