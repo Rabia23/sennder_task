@@ -108,6 +108,7 @@ to build API documentation.
 
 ### Prerequisite
 - Make sure you have Python and Mysql installed in your system :)
+
 **Note:** Python 3.6.0 is used for the task.
 
 ### How to start application (using Virtual Environment)
@@ -236,7 +237,16 @@ make tests
     ```
 
 #### Things that are not included in the task due to time constraints and make the task easy to review from reviewer's perspective:
-- API authentication is not added. The API endpoint is public.
-- Data will be inserted once from csv file into database. If you want to insert it again, you need to truncate/delete the data from the table.
-- Database credentials are directly added in the settings.py file. It should be confidential from security prespective.
+- API authentication is not added. The API endpoints are public.
+- Database credentials are directly added in the settings.py file. It should be confidential from a security perspective.
 - Python logs are being displayed on the console instead of file for the sake of simplicity.
+- Using DEBUG=TRUE for debugging purpose. It shows the whole traceback of the exception. For development purpose it's fine but on production, its value should be FALSE.
+- HTML page containing movies is a plain page without any styling.
+- For now, reading only 250 records from the Ghibli APIs in one go. I couldn't find any pagination in that APIs. If data is paginated there, then we need to read the records in chunks using iteration.
+- Covered most of the test cases but couldn't add people model and API paginated data test cases because of the time issue. People test cases are almost the same as movie model test cases and for API paginated data test cases, we need to add more records in our test to apply the pagination on it.
+- Didn't add retry functionality to retry the APIs on failure. As we are mimicking a real-time behaviour by calling our APIs after a min, so it will be fine for now.
+- Didn’t include Docker stuff because it requires more time to step up things.
+- Didn't add any custom exception handling in our APIs. Exception handling is handled by the built-in classes from which we are inherited our views.
+- As we are fetching the records from the external APIs and save them in our database. To save multiple database calls, I fetch the relevant data from the database at the start of the task at once and compares it with current request data. The data we are fetching is properly indexed so retrieval is faster.
+We can implement a cache to save this database call as well and compare the current request data with the cached data instead of hitting the database.
+- Update movie/people functionality is not implemented which means if anything change in the `movies/people` data in Ghibli APIs, the record will not be updated in the database.
