@@ -133,3 +133,10 @@ dmypy.json
 static/.DS_Store
 
 sennder_env/
+
+# vs code
+settings.json
+
+# celery
+dump.rdb
+django
